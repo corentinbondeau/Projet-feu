@@ -191,6 +191,16 @@ public:
     }
 };
 
+bool isPositionOccupied(float x, float y, const std::vector<Car>& cars, float carWidth, float carHeight) {
+    for (const auto& car : cars) {
+        if (car.shape.getGlobalBounds().intersects(sf::FloatRect(x, y, carWidth, carHeight))) {
+            return true; // Position occupée
+        }
+    }
+    return false; // Position libre
+}
+
+
 int main() {
     // Initialisation aléatoire
     std::srand(static_cast<unsigned>(std::time(0)));
@@ -200,7 +210,7 @@ int main() {
 
     // Chargement de l'image de fond
     sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("C:\\Users\\corentin.bondeau\\source\\repos\\CIR2\\traffic_light\\photo_prog.png")) {
+    if (!backgroundTexture.loadFromFile("C:/Program Files/SFML/img/photo_prog.png")) {
         std::cerr << "Erreur : Impossible de charger l'image photo_prog.png" << std::endl;
         return -1;
     }
@@ -237,19 +247,38 @@ int main() {
             // Ajout de voitures avec la touche A
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A) {
                 int road = std::rand() % 4;
+                float carWidth = 80;
+                float carHeight = 50;
                 if (road == 0) { // Route horizontale haut
-                    cars.emplace_back(700, 300, 80, 50, -CAR_SPEED, sf::Color::Yellow, false, false, false, true);
+                    float x = 700, y = 300;
+                    if (!isPositionOccupied(x, y, cars, carWidth, carHeight)) {
+                        cars.emplace_back(x, y, carWidth, carHeight, -CAR_SPEED, sf::Color::Yellow, false, false, false, true);
+                    }
                 }
                 else if (road == 1) { // Route horizontale bas
-                    cars.emplace_back(50, 440, 80, 50, CAR_SPEED, sf::Color::Cyan, false, false, true, false);
+                    float x = 50, y = 440;
+                    if (!isPositionOccupied(x, y, cars, carWidth, carHeight)) {
+                        cars.emplace_back(x, y, carWidth, carHeight, CAR_SPEED, sf::Color::Cyan, false, false, true, false);
+                    }
                 }
                 else if (road == 2) { // Route verticale gauche
-                    cars.emplace_back(300, 50, 50, 80, CAR_SPEED, sf::Color::Magenta, true, false, false, false);
+                    float x = 300, y = 50;
+                    carWidth = 50;
+                    carHeight = 80;
+                    if (!isPositionOccupied(x, y, cars, carWidth, carHeight)) {
+                        cars.emplace_back(x, y, carWidth, carHeight, CAR_SPEED, sf::Color::Magenta, true, false, false, false);
+                    }
                 }
                 else { // Route verticale droite
-                    cars.emplace_back(440, 800, 50, 80, -CAR_SPEED, sf::Color::Red, false, true, false, false);
+                    float x = 440, y = 800;
+                    carWidth = 50;
+                    carHeight = 80;
+                    if (!isPositionOccupied(x, y, cars, carWidth, carHeight)) {
+                        cars.emplace_back(x, y, carWidth, carHeight, -CAR_SPEED, sf::Color::Red, false, true, false, false);
+                    }
                 }
             }
+
 
             // Suppression de voitures avec la touche S
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::S) {
@@ -327,6 +356,5 @@ int main() {
 
         window.display();
     }
-
     return 0;
 }

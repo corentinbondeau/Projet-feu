@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\",
+  "WorkspaceRootPath": "C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\traffic_light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\traffic_light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:traffic_light.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
@@ -34,31 +34,29 @@
               "DocumentMoniker": "Pages de vue d\u0027ensemble de CMake",
               "ToolTip": "Pages de vue d\u0027ensemble de CMake",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-12-06T15:02:52.306Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T15:02:52.306Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "CMakeLists.txt",
-              "DocumentMoniker": "C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\CMakeLists.txt",
+              "DocumentMoniker": "C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\CMakeLists.txt",
               "RelativeDocumentMoniker": "CMakeLists.txt",
-              "ToolTip": "C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\CMakeLists.txt",
+              "ToolTip": "C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\CMakeLists.txt",
               "RelativeToolTip": "CMakeLists.txt",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-12-06T15:02:52.023Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T15:02:52.023Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "traffic_light.cpp",
-              "DocumentMoniker": "C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\traffic_light.cpp",
+              "DocumentMoniker": "C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\traffic_light.cpp",
               "RelativeDocumentMoniker": "traffic_light.cpp",
-              "ToolTip": "C:\\Users\\corentin.bondeau\\Documents\\GitHub\\Projet-Feu\\traffic_light.cpp",
+              "ToolTip": "C:\\Users\\corentin.bondeau\\source\\repos\\Projet-Feu\\traffic_light.cpp",
               "RelativeToolTip": "traffic_light.cpp",
-              "ViewState": "AgIAAEwBAAAAAAAAAAAqwGgBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEMBAAAAAAAAAAAYwGgBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-06T15:02:33.878Z",
               "EditorCaption": ""

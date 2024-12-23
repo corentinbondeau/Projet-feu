@@ -98,9 +98,10 @@ public:
     bool comingFromRight;
     int nbRandom;
     RandomGenerator randGen; // RandomGenerator comme membre privé
+    std::string direction; // Paramètre pour la direction (tout droit, droite, gauche)
 
     Car(float x, float y, float width, float height, float speed, sf::Color color, bool top, bool bottom, bool left, bool right)
-        : comingFromTop(top), comingFromBottom(bottom), comingFromLeft(left), comingFromRight(right) {
+        : comingFromTop(top), comingFromBottom(bottom), comingFromLeft(left), comingFromRight(right), direction("tout droit") {
         this->shape = sf::RectangleShape(sf::Vector2f(width, height));
         this->shape.setPosition(x, y);
         this->speed = speed;
@@ -110,6 +111,16 @@ public:
     bool checkCollision(const Car& other) {
         // Vérifie si les voitures se touchent (collision simple sur les bords)
         return shape.getGlobalBounds().intersects(other.shape.getGlobalBounds());
+    }
+
+    void setDirection(const std::string& newDirection) {
+        if (newDirection == "tout droit" || newDirection == "droite" || newDirection == "gauche") {
+            direction = newDirection;
+            std::cout << "Direction changée : " << direction << std::endl;
+        }
+        else {
+            std::cout << "Direction invalide. Choisissez parmi : tout droit, droite, gauche." << std::endl;
+        }
     }
 
     void move(bool horizontal, const std::vector<TrafficLight>& lights, const std::vector<Car>& cars) {
@@ -148,31 +159,23 @@ public:
                     case 0: // Tourner à gauche
                         horizontal = false;            // Passer à une trajectoire verticale
                         targetRotation = 90.0f;        // Rotation cible de 90°
+                        setDirection("gauche");
                         break;
 
                     case 1: // Tourner à droite
                         horizontal = false;            // Passer à une trajectoire verticale
                         targetRotation = -90.0f;       // Rotation cible de -90°
+                        setDirection("droite");
                         break;
 
                     case 2: // Continuer tout droit
                         currentSpeed = speed;          // Garder la vitesse actuelle
+                        setDirection("tout droit");
                         break;
                     }
 
-                    
                 }
             }
-
-
-
-
-           
-
-            
-            
- 
-
 
             // Voiture venant du haut (regarde le feu du haut)
             else if (comingFromTop && !horizontal) {
@@ -259,6 +262,7 @@ public:
         }
     }
 };
+
 
 bool isPositionOccupied(float x, float y, const std::vector<Car>& cars, float carWidth, float carHeight) {
     for (const auto& car : cars) {

@@ -1,0 +1,10 @@
+^C:\USERS\ADMIN\DESKTOP\PROJET-FEU\BUILD\CMAKEFILES\F656E4D569821C5B70B7F2F98727EE17\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\mingw64\bin\cmake.exe" -SC:/Users/Admin/Desktop/Projet-feu -BC:/Users/Admin/Desktop/Projet-feu/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Admin/Desktop/Projet-feu/build/thread_project.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

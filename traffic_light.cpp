@@ -5,8 +5,6 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include <iostream>
-#include <random>
 
 // Dimensions de la fenêtre
 const int WINDOW_WIDTH = 800;
@@ -66,29 +64,8 @@ public:
     }
 };
 
-class RandomGenerator {
-private:
-    std::mt19937 generator; // Générateur pseudo-aléatoire
-public:
-    // Constructeur pour initialiser le générateur avec un seed aléatoire
-    RandomGenerator() : generator(std::random_device{}()) {}
-
-    // Méthode pour générer un entier dans une plage donnée
-    int getRandomInt(int min, int max) {
-        std::uniform_int_distribution<int> distrib(min, max);
-        return distrib(generator);
-    }
-
-    // Méthode pour générer un nombre réel dans une plage donnée
-    double getRandomDouble(double min, double max) {
-        std::uniform_real_distribution<double> distrib(min, max);
-        return distrib(generator);
-    }
-};
-
 // Classe Voiture
 class Car {
-
 public:
     sf::RectangleShape shape;
     float speed;
@@ -96,12 +73,9 @@ public:
     bool comingFromBottom;
     bool comingFromLeft;
     bool comingFromRight;
-    int nbRandom;
-    RandomGenerator randGen; // RandomGenerator comme membre privé
-    std::string direction; // Paramètre pour la direction (tout droit, droite, gauche)
 
     Car(float x, float y, float width, float height, float speed, sf::Color color, bool top, bool bottom, bool left, bool right)
-        : comingFromTop(top), comingFromBottom(bottom), comingFromLeft(left), comingFromRight(right), direction("tout droit") {
+        : comingFromTop(top), comingFromBottom(bottom), comingFromLeft(left), comingFromRight(right) {
         this->shape = sf::RectangleShape(sf::Vector2f(width, height));
         this->shape.setPosition(x, y);
         this->speed = speed;
@@ -113,70 +87,24 @@ public:
         return shape.getGlobalBounds().intersects(other.shape.getGlobalBounds());
     }
 
-    void setDirection(const std::string& newDirection) {
-        if (newDirection == "tout droit" || newDirection == "droite" || newDirection == "gauche") {
-            direction = newDirection;
-            std::cout << "Direction changée : " << direction << std::endl;
-        }
-        else {
-            std::cout << "Direction invalide. Choisissez parmi : tout droit, droite, gauche." << std::endl;
-        }
-    }
-
     void move(bool horizontal, const std::vector<TrafficLight>& lights, const std::vector<Car>& cars) {
         bool canMove = true;
         float currentSpeed = speed;
 
         // Vérifier uniquement le feu correspondant à la direction de la voiture
         for (const auto& light : lights) {
-
-            // Déclaration de variables nécessaires
-            float targetRotation = 0.0f; // Rotation cible de la voiture
-            float rotationSpeed = 2.0f;  // Vitesse de rotation progressive
-
-            // Si la voiture vient de la gauche sur une trajectoire horizontale
+            // Voiture venant de la gauche (regarde le feu à gauche)
             if (comingFromLeft && horizontal) {
-                // Vérification du feu de circulation (position et état rouge/orange)
                 if (light.lightShape.getPosition().x == 130 && light.isRedOrOrange()) { // Feu de gauche
                     if (shape.getPosition().x < 150) {
-                        canMove = false; // Arrêter la voiture
+                        canMove = false;
                         if (light.isOrange()) {
-                            currentSpeed = speed / 3;  // Réduire la vitesse si le feu est orange
+                            currentSpeed = speed / 3;  // Réduit la vitesse si le feu est orange
                         }
                     }
-                    return; // Sortir de la condition, inutile de continuer plus loin
-                }
-
-                // Vérification si la voiture a dépassé le feu
-                if (shape.getPosition().x > 270) {
-                    canMove = true;  // Permettre le mouvement
-
-                    // Générer un nombre aléatoire pour déterminer la direction
-                    int nbRandom = randGen.getRandomInt(0, 2);
-
-                    // Déterminer l'action en fonction de la valeur aléatoire
-                    switch (nbRandom) {
-                    case 0: // Tourner à gauche
-                        horizontal = false;            // Passer à une trajectoire verticale
-                        targetRotation = 90.0f;        // Rotation cible de 90°
-                        setDirection("gauche");
-                        break;
-
-                    case 1: // Tourner à droite
-                        horizontal = false;            // Passer à une trajectoire verticale
-                        targetRotation = -90.0f;       // Rotation cible de -90°
-                        setDirection("droite");
-                        break;
-
-                    case 2: // Continuer tout droit
-                        currentSpeed = speed;          // Garder la vitesse actuelle
-                        setDirection("tout droit");
-                        break;
-                    }
-
+                    break; // Une fois qu'on a trouvé le feu de gauche, on peut sortir de la boucle
                 }
             }
-
             // Voiture venant du haut (regarde le feu du haut)
             else if (comingFromTop && !horizontal) {
                 if (light.lightShape.getPosition().y == 130 && light.isRedOrOrange()) { // Feu du haut
@@ -263,7 +191,6 @@ public:
     }
 };
 
-
 bool isPositionOccupied(float x, float y, const std::vector<Car>& cars, float carWidth, float carHeight) {
     for (const auto& car : cars) {
         if (car.shape.getGlobalBounds().intersects(sf::FloatRect(x, y, carWidth, carHeight))) {
@@ -277,9 +204,6 @@ bool isPositionOccupied(float x, float y, const std::vector<Car>& cars, float ca
 int main() {
     // Initialisation aléatoire
     std::srand(static_cast<unsigned>(std::time(0)));
-    std::random_device rd; // Générateur basé sur l'entropie matérielle
-    std::mt19937 gen(rd()); // Mersenne Twister, un générateur pseudo-aléatoire
-    std::uniform_int_distribution<> distrib(1, 3); // Plage de nombres aléatoires [1, 100]
 
     // Création de la fenêtre
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Simulation Circulation avec Feux");
